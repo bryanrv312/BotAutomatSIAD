@@ -321,6 +321,33 @@ btn_publicar = tk.Button(ventana, text="🚀 Publicar CITT", command=publicar_ci
 btn_publicar.pack(pady=5)
 
 
+# --- BOTÓN DE ACTUALIZACIÓN APP DESDE GITHUB ---
+def actualizar():
+    try:
+        url = "https://github.com/bryanrv312/BotAutomatSIAD/archive/refs/heads/main.zip"
+        r = requests.get(url)
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        
+        destino = "actualizacion"  # Carpeta donde se extraerá
+        if not os.path.exists(destino):
+            os.makedirs(destino)
+        
+        z.extractall(destino)
+        resultado.set("✅ Actualización completada")
+    except Exception as e:
+        resultado.set(f"❌ Error: {e}")
+
+# Variable para mostrar mensajes
+resultado = tk.StringVar()
+resultado.set("Esperando actualización...")
+
+btn_actualizar = tk.Button(ventana, text="🔄 Actualizar desde GitHub", command=actualizar)
+btn_actualizar.pack(pady=5)
+
+lbl_actualizar = tk.Label(ventana, textvariable=resultado)
+lbl_actualizar.pack(pady=5)
+# --- FIN DEL BOTÓN DE ACTUALIZACIÓN APP DESDE GITHUB---
+
 
 
 # Footer
