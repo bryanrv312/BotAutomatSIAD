@@ -324,16 +324,15 @@ btn_publicar.pack(pady=5)
 # --- BOTÓN DE ACTUALIZACIÓN APP DESDE GITHUB ---
 def actualizar():
     try:
-        url = "https://github.com/bryanrv312/BotAutomatSIAD/archive/refs/heads/main.zip"
+        #url = "https://github.com/TU_USUARIO/TU_REPO/releases/latest/download/tuApp.exe"
+        #url = "https://raw.githubusercontent.com/github/explore/main/topics/python/python.png"
+        url = "https://github.com/bryanrv312/BotAutomatSIAD/releases/tag/v1.0.1/SIAD-publicarCitt-Git.exe"
         r = requests.get(url)
-        z = zipfile.ZipFile(io.BytesIO(r.content))
-        
-        destino = "actualizacion"  # Carpeta donde se extraerá
-        if not os.path.exists(destino):
-            os.makedirs(destino)
-        
-        z.extractall(destino)
-        resultado.set("✅ Actualización completada")
+        with open("SIAD-publicarCitt-Git.exe", "wb") as f:
+        #with open("test.png", "wb") as f:
+            f.write(r.content)
+        resultado.set("✅ Ejecutable actualizado")
+        #resultado.set("✅ Archivo de prueba descargado")
     except Exception as e:
         resultado.set(f"❌ Error: {e}")
 
